@@ -23,8 +23,8 @@ export function HeaderBar() {
 
   return (
     <View style={styles.view1}>
-      <View style={styles.view2}>
-        <View style={styles.view3}>
+      <View style={styles.hview2}>
+        <View style={styles.hview3}>
           {/* <FontAwesome6 name={"magnifying-glass"} size={26} color={"white"} /> */}
           <FontAwesome6
             name={"bars"}
@@ -35,14 +35,14 @@ export function HeaderBar() {
             }}
           />
         </View>
-        <View style={styles.view4}>
+        <View style={styles.hview4}>
           <TextInput
-            style={styles.input1}
+            style={styles.hinput1}
             inputMode={"text"}
             placeholder="Search..."
           />
         </View>
-        <View style={styles.view5}>
+        <View style={styles.hview5}>
           {getUser.mobile ? 
             <Image
               source={{
@@ -66,24 +66,24 @@ const styles = StyleSheet.create({
   view1: {
     // flex: 1,
   },
-  view2: {
+  hview2: {
     height: 70,
     backgroundColor: "#00BFA6",
     flexDirection: "row",
     columnGap: 10,
     alignItems: "center",
   },
-  view3: {
+  hview3: {
     width: 100,
     paddingStart: 20,
     // backgroundColor: "yellow",
   },
-  view4: {
+  hview4: {
     flex: 1,
     // backgroundColor: "green",
     alignItems: "center",
   },
-  view5: {
+  hview5: {
     width: 80,
     // backgroundColor: "blue",
     justifyContent: "center",
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "white",
   },
-  input1: {
+  hinput1: {
     width: "100%",
     height: 50,
     borderStyle: "solid",
