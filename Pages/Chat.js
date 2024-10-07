@@ -45,8 +45,8 @@ export default function Chat({ route }) {
     async function fetchChatArray() {
       let userJson = await AsyncStorage.getItem("user");
       let user = JSON.parse(userJson);
-      console.log(user.id);
-      console.log(user);
+      // console.log(user.id);
+      // console.log(user);
 
       let response = await fetch(
         "http://192.168.56.1:8080/Quick_Chat/LoadChat?userId=" +
@@ -68,14 +68,13 @@ export default function Chat({ route }) {
 
     const intervalId = setInterval(() => {
       setCount((prevCount) => prevCount + 1);
+      fetchChatArray();
     }, 1000); // Updates every second
 
     // Cleanup function to clear the interval when the component unmounts or you navigate away
     return () => {
       clearInterval(intervalId);
     };
-
-
   }, []);
 
   return (
