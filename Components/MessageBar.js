@@ -10,18 +10,39 @@ import {
 } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
+
 
 export function MessageBar() {
   const navigation = useNavigation();
+  const [getChatText,setChatText] = useState("");
 
   return (
     <View style={styles.view1}>
-      <View style={styles.view2}>
-          <View style={styles.view7}>
+      <View style={styles.view10}>
+          <View style={styles.view11}>
             <TextInput style={styles.input1} 
               placeholder="Message..."
+              onChangeText={
+                (text)=>{
+                    setChatText(text)
+                }
+              }
               />
-            <Pressable style={styles.pressable1}>
+            <Pressable style={styles.pressable1} onPress={
+                async()=>{
+                    // console.log(getChatText);
+                    let response = await fetch("http://192.168.56.1:8080/Quick_Chat/SendChat?logedUserId=2&otherUserId="+userInfo.other_user_id+"&message="+getChatText);
+
+                    if(response.ok){
+                        let json = await response.json();
+
+                        if(json.success){
+                            console.log("Message Sent");
+                        }
+                    }
+                }
+            }>
               <FontAwesome6 name="paper-plane" size={25} />
             </Pressable>
           </View>
@@ -34,21 +55,15 @@ const styles = StyleSheet.create({
   view1: {
     // flex: 1,
   },
-  view2: {
+  view10: {
     height: 70,
     backgroundColor: "#00BFA6",
     flexDirection: "row",
     columnGap: 10,
     alignItems: "center",
   },
-  view3: {
-    width: "33%",
-    height: 70,
-    alignItems: "center",
-    justifyContent: "center",
-    // backgroundColor: "yellow",
-  },
-  view7: {
+ 
+  view11: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",

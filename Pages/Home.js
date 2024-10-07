@@ -67,24 +67,20 @@ export default function Home() {
             }}
           >
             <View
-              style={
-                item.other_user_status == 1 ? styles.view3_2 : styles.view3_1
-              }
-            >
-              {item.avatar_image_found ? (
+              style={item.other_user_status == 1 ? styles.view3_2 : styles.view3_1}>
+              {
+              item.avatar_image_found ? 
                 <Image
-                  source={
-                    "http://192.168.56.1:8080/Quick_Chat/AvatarImages/" +
+                  source={{uri:"http://192.168.56.1:8080/Quick_Chat/AvatarImages/" +
                     item.other_user_mobile +
-                    ".png"
-                  }
+                    ".png"}}
                   contentFit="contain"
                   style={styles.image1}
                 />
-              ) : (
+               : 
                 <Image source={profile} style={styles.image1} />
 
-              )}
+              }
             </View>
             <View style={styles.view4}>
               <Text style={styles.text1}>{item.other_user_name}</Text>
