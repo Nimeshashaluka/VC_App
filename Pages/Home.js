@@ -1,19 +1,29 @@
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Alert,
+  Image,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as SplashScreen from "expo-splash-screen";
 import { FontAwesome6 } from "@expo/vector-icons";
-import {HeaderBar}from "../Components/HeaderBar";
+import { HeaderBar } from "../Components/HeaderBar";
 import { FooterNavBar } from "../Components/FooterNavBar";
 import { useState } from "react";
 import AsyncStorage, {
   useAsyncStorage,
 } from "@react-native-async-storage/async-storage";
 import { FlashList } from "@shopify/flash-list";
-
+import { useNavigation } from "@react-navigation/native";
 
 export default function Home() {
+  const navigation = useNavigation();
+  const profile = require("../assets/Images/download.jpg");
   const [getChatArray, setChatArray] = useState([]);
 
   useEffect(() => {
@@ -31,6 +41,8 @@ export default function Home() {
           let chatArray = json.jsonChatArray;
           console.log(chatArray);
           setChatArray(chatArray);
+
+          // console.log("ok done");
         }
       }
     }
@@ -39,12 +51,18 @@ export default function Home() {
 
   return (
     <SafeAreaView style={styles.view1}>
-      <HeaderBar/>
+      <HeaderBar />
 
       <FlashList
         data={getChatArray}
         renderItem={({ item }) => (
-          <View style={styles.view2}>
+          <Pressable
+            style={styles.view2}
+            onPress={() => {
+              Alert.alert("View Chat", "User : " + item.other_user_id);
+              navigation.navigate("Chat");
+            }}
+          >
             <View
               style={
                 item.other_user_status == 1 ? styles.view3_2 : styles.view3_1
@@ -61,7 +79,8 @@ export default function Home() {
                   style={styles.image1}
                 />
               ) : (
-                <Text style={styles.text6}>DP</Text>
+                <Image source={profile} style={styles.image1} />
+
               )}
             </View>
             <View style={styles.view4}>
@@ -76,19 +95,18 @@ export default function Home() {
                 <FontAwesome6
                   name={"check"}
                   size={18}
-                  color={item.chat_status_id == 1 ? "green" : "red"}
+                  color={item.chat_status_id == 1 ? "blue" : "black"}
                 />
               </View>
 
-              <Text style={styles.text3}>{item.dateTime}</Text>
+              <Text style={styles.text3}>{item.date_time}</Text>
             </View>
-          </View>
+          </Pressable>
         )}
         estimatedItemSize={200}
       />
 
-      <FooterNavBar/>
-
+      <FooterNavBar />
     </SafeAreaView>
   );
 }
@@ -112,8 +130,9 @@ const styles = StyleSheet.create({
     height: 80,
     backgroundColor: "white",
     borderRadius: 40,
-    // borderWidth: 1,
-    // borderColor: "",
+    justifyContent: "center",
+    borderWidth: 4,
+    borderColor: "white",
   },
   view3_2: {
     width: 80,
@@ -122,6 +141,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     borderWidth: 4,
     borderColor: "green",
+    justifyContent: "center",
   },
   view4: {
     flex: 1,
@@ -151,9 +171,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
     alignItems: "flex-end",
   },
+  text6: {
+    fontSize: 28,
+    fontWeight: "bold",
+    // justifyContent:'flex-end',
+    alignSelf: "center",
+  },
   view6: {
-    flex: 1,
-    alignItems: "flex-end",
-    // backgroundColor: "blue",
+    flexDirection: "row",
+  },
+  image1: {
+    width: 70,
+    height: 70,
+    // backgroundColor:'red',
+    borderRadius: 35,
+    alignItems: "center",
   },
 });

@@ -29,7 +29,7 @@ export default function App() {
 
       <Pressable
         style={styles.StBtn1}
-        onPress={() => navigation.navigate("LogIn")}
+        onPress={() => navigation.navigate("SignUp")}
       >
         <Text style={styles.btnText}>Next</Text>
       </Pressable>

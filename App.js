@@ -7,6 +7,7 @@ import SignUp from "./Pages/SignUp";
 import Home from "./Pages/Home";
 import Profile from './Pages/Profile';
 import Contact from './Pages/Contact';
+import Chat from './Pages/Chat';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ export default function App(){
         <Stack.Screen name="Home" component={Home} options={{headerShown:false}}/>
         <Stack.Screen name="Profile" component={Profile} options={{headerShown:false}}/>
         <Stack.Screen name="Contact" component={Contact} options={{headerShown:false}}/>
+        <Stack.Screen name="Chat" component={Chat} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

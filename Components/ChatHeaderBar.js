@@ -1,31 +1,30 @@
 import { FontAwesome6 } from "@expo/vector-icons";
 import { Image, StyleSheet, Text, TextInput, View } from "react-native";
 
-export function HeaderBar() {
+export function ChatHeaderBar() {
   const profile = require("../assets/Images/download.jpg");
 
   return (
     <View style={styles.view1}>
       <View style={styles.view2}>
-        <View style={styles.view3}>
-        {/* <FontAwesome6 name={"magnifying-glass"} size={26} color={"white"} /> */}
-        <FontAwesome6 name={"bars"} size={32} color={"white"} />
 
-        </View>
-        <View style={styles.view4}>
-        <TextInput
-              style={styles.input1}
-              inputMode={"text"}
-              placeholder="Search..."
-             
-            />
-
-        </View>
         <View style={styles.view5}>
           {/* <View style={styles.profile}> */}
           <Image source={profile} style={styles.profile} />
           {/* </View> */}
         </View>
+
+        <View style={styles.view4}>
+          <Text style={styles.text2}>Sahan Perera</Text>
+          <Text style={styles.text3}>Online</Text>
+        </View>
+
+        <View style={styles.view3}>
+          {/* <FontAwesome6 name={"magnifying-glass"} size={26} color={"white"} /> */}
+          <FontAwesome6 name={"phone"} size={24} color={"white"} />
+          <FontAwesome6 name={"video"} size={24} color={"white"} />
+        </View>
+
       </View>
     </View>
   );
@@ -35,22 +34,30 @@ const styles = StyleSheet.create({
     // flex: 1,
   },
   view2: {
-    height:70,
+    height: 70,
     backgroundColor: "#00BFA6",
     flexDirection: "row",
     columnGap: 10,
-    alignItems:"center",
-
+    alignItems: "center",
   },
   view3: {
     width: 100,
-    paddingStart:20
-    // backgroundColor: "yellow",
+    paddingStart: 20,
+    flexDirection:"row",
+    columnGap:10,
+
+  }, text2: {
+    fontSize: 22,
+    fontWeight: "bold",
   },
+  text3: {
+    fontSize: 16,
+  },
+
   view4: {
     flex: 1,
     // backgroundColor: "green",
-    alignItems:"center"
+    alignItems: "center",
   },
   view5: {
     width: 80,
@@ -65,7 +72,6 @@ const styles = StyleSheet.create({
     // backgroundColor: "white",
     borderWidth: 2,
     borderColor: "white",
-
   },
   input1: {
     width: "100%",
@@ -79,6 +85,6 @@ const styles = StyleSheet.create({
     borderColor: "white",
     borderWidth: 2,
     marginBottom: 5,
-    color:"white",
+    color: "white",
   },
 });

@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { FooterNavBar } from "../Components/FooterNavBar";
 
 export default function Profile() {
   return (
@@ -52,21 +53,25 @@ export default function Profile() {
               setEmail(text);
             }}
           />
-        </View>
-        <Pressable
-          style={styles.StBtn1}
-          onPress={() => navigation.navigate("LogIn")}
-        >
-          <Text style={styles.btnText1}>Update</Text>
-        </Pressable>
 
-        <Pressable
-          style={styles.StBtn2}
-          onPress={() => navigation.navigate("LogIn")}
-        >
-          <Text style={styles.btnText2}>Log Out</Text>
-        </Pressable>
+          <Pressable
+            style={styles.StBtn1}
+            onPress={() => navigation.navigate("LogIn")}
+          >
+            <Text style={styles.btnText1}>Update</Text>
+          </Pressable>
+
+          <Pressable
+            style={styles.StBtn2}
+            onPress={() => navigation.navigate("LogIn")}
+          >
+            <Text style={styles.btnText2}>Log Out</Text>
+          </Pressable>
+        </View>
+
       </View>
+      <FooterNavBar />
+
     </SafeAreaView>
   );
 }
@@ -75,8 +80,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
-    rowGap: 10,
-    padding: 20,
+    rowGap: 5,
   },
 
   text1: {
@@ -85,6 +89,7 @@ const styles = StyleSheet.create({
   },
   view2: {
     width: "100%",
+    padding: 20,
   },
   view3: {
     width: 100,
