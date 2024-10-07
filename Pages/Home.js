@@ -59,8 +59,11 @@ export default function Home() {
           <Pressable
             style={styles.view2}
             onPress={() => {
-              Alert.alert("View Chat", "User : " + item.other_user_id);
-              navigation.navigate("Chat");
+              // Alert.alert("View Chat", "User : " + item.other_user_id);
+              navigation.navigate("Chat",{
+                other_user_id:item.other_user_id,
+                userInfo: item,
+              });
             }}
           >
             <View

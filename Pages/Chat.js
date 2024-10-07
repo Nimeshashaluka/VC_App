@@ -21,61 +21,61 @@ import AsyncStorage, {
 import { FlashList } from "@shopify/flash-list";
 import { useNavigation } from "@react-navigation/native";
 
-export default function Chat() {
+export default function Chat({route}) {
   const navigation = useNavigation();
   const profile = require("../assets/Images/download.jpg");
-
+  //other user id
+  const { other_user_id } = route.params;
+  const { userInfo } = route.params;
+  console.log(other_user_id);
+  console.log(userInfo);
   //store chat array
-  const [getChatArray,setChatArray] = useState([]);
+  const [getChatArray, setChatArray] = useState([]);
 
   //fetch chat array from server
-  useEffect(
-    ()=>{
-      async function fetchChatArray(){
-        let response = await fetch("http://192.168.56.1:8080/Quick_Chat/LoadChat?userId=2&otherUserId=5");
-        if(response.ok){
-          let chatArray = await response.json();
-          console.log(chatArray);
-          setChatArray(chatArray);
-        }
+  useEffect(() => {
+    async function fetchChatArray() {
+      let response = await fetch(
+        "http://192.168.56.1:8080/Quick_Chat/LoadChat?userId=2&otherUserId=5"
+      );
+      if (response.ok) {
+        let chatArray = await response.json();
+        // console.log(chatArray);
+        setChatArray(chatArray);
       }
-      fetchChatArray();
-    },[]
-  );
+    }
+    fetchChatArray();
+  }, []);
 
   return (
-    <SafeAreaView style={styles.view1}>
+    <SafeAreaView style={styles.view1} >
       <ChatHeaderBar />
-      <ScrollView>
-        <View style={styles.view4_1}>
-          <Text style={styles.text4}>Message</Text>
-          <View style={styles.view5}>
-            <Text style={styles.text5}>Time</Text>
-            <FontAwesome6
-              name={"check"}
-              color={true ? "green" : "black"}
-              size={20}
-            />
+      
+      <FlashList
+        data={getChatArray}
+        renderItem={({ item }) => 
+
+          <View style={item.side=="right"?styles.view4_1:styles.view4_2}>
+            <Text style={styles.text4}>{item.message}</Text>
+            <View style={styles.view5}>
+              <Text style={styles.text5}>{item.date_time}</Text>
+              
+              {
+                item.side == "right" ? 
+                <FontAwesome6
+                name={"check"}
+                color={item.status == 1 ? "blue" : "black"}
+                size={20}
+              />:null
+              }
+             
+            </View>
           </View>
-        </View>
+        }
+        estimatedItemSize={200}
+      />
 
-        <View style={styles.view4_2}>
-          <Text style={styles.text4}>Message</Text>
-          <View style={styles.view5}>
-            <FontAwesome6
-              name={"check"}
-              color={true ? "green" : "black"}
-              size={20}
-            />
-            <Text style={styles.text5}>Time</Text>
-          </View>
-        </View>
-
-       
-
-      </ScrollView>
-
-      <MessageBar/>
+      <MessageBar />
     </SafeAreaView>
   );
 }
@@ -103,20 +103,20 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderColor: "red",
     borderWidth: 2,
-  }, text2: {
+  },
+  text2: {
     fontSize: 22,
     fontWeight: "bold",
   },
   text3: {
     fontSize: 16,
-  },  text4: {
+  },
+  text4: {
     fontSize: 16,
   },
   text5: {
     fontSize: 12,
   },
-
-
 
   view4_1: {
     backgroundColor: "#a9dcc1",
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     padding: 12,
     justifyContent: "center",
     alignItems: "flex-end",
-    rowGap: 5,
+    // rowGap: 1,
     alignSelf: "flex-end",
   },
   view4_2: {

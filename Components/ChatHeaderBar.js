@@ -6,15 +6,15 @@ export function ChatHeaderBar() {
 
   return (
     <View style={styles.view1}>
-      <View style={styles.view2}>
+      <View style={styles.view7}>
 
-        <View style={styles.view5}>
+        <View style={styles.view8}>
           {/* <View style={styles.profile}> */}
           <Image source={profile} style={styles.profile} />
           {/* </View> */}
         </View>
 
-        <View style={styles.view4}>
+        <View style={styles.view9}>
           <Text style={styles.text2}>Sahan Perera</Text>
           <Text style={styles.text3}>Online</Text>
         </View>
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   view1: {
     // flex: 1,
   },
-  view2: {
+  view7: {
     height: 70,
     backgroundColor: "#00BFA6",
     flexDirection: "row",
@@ -54,12 +54,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 
-  view4: {
+  view9: {
     flex: 1,
     // backgroundColor: "green",
     alignItems: "center",
   },
-  view5: {
+  view8: {
     width: 80,
     // backgroundColor: "blue",
     justifyContent: "center",
