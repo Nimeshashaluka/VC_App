@@ -1,16 +1,49 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FooterNavBar } from "../Components/FooterNavBar";
 import { useNavigation } from "@react-navigation/native";
+import { useEffect } from "react";
+import AsyncStorage, {
+  useAsyncStorage,
+} from "@react-native-async-storage/async-storage";
+import { useState } from "react";
 
 export default function Profile() {
   const navigation = useNavigation();
+  const [getUser, setUser] = useState([]);
+  const profile = require("../assets/Images/download.jpg");
 
+
+  useEffect(() => {
+    async function fetchUser() {
+      let userJson = await AsyncStorage.getItem("user");
+      let user = JSON.parse(userJson);
+      setUser(user);
+      console.log(user.id);
+      console.log(user);
+    }
+    fetchUser();
+  }, []);
   return (
     <SafeAreaView>
       <View style={styles.view1}>
         <Text style={styles.text1}>My Profile</Text>
-        <View style={styles.view3}></View>
+        <View style={styles.view3}>
+          {getUser.mobile ? 
+            <Image
+              source={{
+                uri:
+                  "http://192.168.56.1:8080/Quick_Chat/AvatarImages/" +
+                  getUser.mobile +
+                  ".png",
+              }}
+              contentFit="contain"
+              style={styles.view3}
+            />
+          : (
+            <Image source={profile} style={styles.view3} />
+          )}
+        </View>
 
         <View style={styles.view2}>
           <Text style={styles.textInput1}>First Name</Text>
@@ -18,6 +51,7 @@ export default function Profile() {
             style={styles.input1}
             inputMode={"text"}
             maxLength={20}
+            value={getUser.first_name}
             placeholder="Your First Name"
             onChangeText={(text) => {
               setFirstName(text);
@@ -29,6 +63,7 @@ export default function Profile() {
             style={styles.input1}
             inputMode={"text"}
             maxLength={20}
+            value={getUser.last_name}
             placeholder="Your Last Name"
             onChangeText={(text) => {
               setLastName(text);
@@ -40,6 +75,7 @@ export default function Profile() {
             style={styles.input1}
             inputMode={"tel"}
             maxLength={10}
+            value={getUser.mobile}
             placeholder="Your Mobile"
             onChangeText={(text) => {
               setMobile(text);
@@ -51,6 +87,7 @@ export default function Profile() {
             style={styles.input1}
             inputMode={"email"}
             maxLength={45}
+            value={getUser.email}
             placeholder="Your Email"
             onChangeText={(text) => {
               setEmail(text);
@@ -71,10 +108,8 @@ export default function Profile() {
             <Text style={styles.btnText2}>Log Out</Text>
           </Pressable>
         </View>
-
       </View>
       <FooterNavBar />
-
     </SafeAreaView>
   );
 }
@@ -98,7 +133,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
-    backgroundColor: "white",
+    // backgroundColor: "white",
     borderWidth: 2,
     borderColor: "#00BFA6",
   },

@@ -25,6 +25,8 @@ export default function Home() {
   const navigation = useNavigation();
   const profile = require("../assets/Images/download.jpg");
   const [getChatArray, setChatArray] = useState([]);
+  const [count, setCount] = useState(0);
+
 
   useEffect(() => {
     async function fetchData() {
@@ -47,6 +49,16 @@ export default function Home() {
       }
     }
     fetchData();
+
+    const intervalId = setInterval(() => {
+      setCount((prevCount) => prevCount + 1);
+      fetchData();
+    }, 1000); // Updates every second
+
+    // Cleanup function to clear the interval when the component unmounts or you navigate away
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   return (

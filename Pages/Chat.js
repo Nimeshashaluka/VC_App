@@ -146,7 +146,8 @@ export default function Chat({ route }) {
           />
           <Pressable
             style={styles.pressable1}
-            onPress={async () => {
+            onPress={
+              async () => {
               // console.log(getChatText);
 
               if (getChatText.length == 0) {
