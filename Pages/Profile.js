@@ -1,4 +1,11 @@
-import { Image, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FooterNavBar } from "../Components/FooterNavBar";
 import { useNavigation } from "@react-navigation/native";
@@ -13,6 +20,10 @@ export default function Profile() {
   const [getUser, setUser] = useState([]);
   const profile = require("../assets/Images/download.jpg");
 
+  const [getFirstName, setFirstName] = useState("");
+  const [getLastName, setLastName] = useState("");
+  const [getMobile, setMobile] = useState("");
+  const [getEmail, setEmail] = useState("");
 
   useEffect(() => {
     async function fetchUser() {
@@ -29,7 +40,7 @@ export default function Profile() {
       <View style={styles.view1}>
         <Text style={styles.text1}>My Profile</Text>
         <View style={styles.view3}>
-          {getUser.mobile ? 
+          {getUser.mobile ? (
             <Image
               source={{
                 uri:
@@ -40,7 +51,7 @@ export default function Profile() {
               contentFit="contain"
               style={styles.view3}
             />
-          : (
+          ) : (
             <Image source={profile} style={styles.view3} />
           )}
         </View>
@@ -94,16 +105,19 @@ export default function Profile() {
             }}
           />
 
-          <Pressable
+          {/* <Pressable
             style={styles.StBtn1}
             onPress={() => navigation.navigate("LogIn")}
           >
             <Text style={styles.btnText1}>Update</Text>
-          </Pressable>
+          </Pressable> */}
 
           <Pressable
             style={styles.StBtn2}
-            onPress={() => navigation.navigate("LogIn")}
+            onPress={() => {
+              userJson = null;
+              navigation.navigate("LogIn");
+            }}
           >
             <Text style={styles.btnText2}>Log Out</Text>
           </Pressable>
@@ -179,6 +193,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
-    marginTop: 8,
+    marginTop: 25,
+    marginBottom:35,
   },
 });

@@ -110,6 +110,7 @@ export default function App() {
                         "! , Your Account " +
                         json.message
                     );
+                   
 
                     try{
                       await AsyncStorage.setItem("user",JSON.stringify(user));
@@ -117,8 +118,10 @@ export default function App() {
                     }catch(e){
 
                     }
-
+                   
                     navigation.navigate("Home")
+
+                    
                   } else {
                     Alert.alert("Error", json.message);
                   }
