@@ -1,5 +1,5 @@
 import { FontAwesome6 } from "@expo/vector-icons";
-import { Image, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Image, StyleSheet, Text, TextInput, View } from "react-native";
 
 export function HeaderBar() {
   const profile = require("../assets/Images/download.jpg");
@@ -9,7 +9,13 @@ export function HeaderBar() {
       <View style={styles.view2}>
         <View style={styles.view3}>
         {/* <FontAwesome6 name={"magnifying-glass"} size={26} color={"white"} /> */}
-        <FontAwesome6 name={"bars"} size={32} color={"white"} />
+        <FontAwesome6 name={"bars"} size={32} color={"white"} 
+        onPress={
+          ()=>{
+            Alert.alert("Warning","Navigation bar");
+          }
+        }
+        />
 
         </View>
         <View style={styles.view4}>

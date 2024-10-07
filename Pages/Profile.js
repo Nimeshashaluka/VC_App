@@ -1,8 +1,11 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FooterNavBar } from "../Components/FooterNavBar";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Profile() {
+  const navigation = useNavigation();
+
   return (
     <SafeAreaView>
       <View style={styles.view1}>

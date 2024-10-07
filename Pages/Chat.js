@@ -38,6 +38,8 @@ export default function Chat({ route }) {
   //send Chat
   const [getChatText, setChatText] = useState("");
 
+  const [count, setCount] = useState(0);
+
   //fetch chat array from server
   useEffect(() => {
     async function fetchChatArray() {
@@ -60,9 +62,20 @@ export default function Chat({ route }) {
     }
     fetchChatArray();
 
-    setInterval(() => {
-      fetchChatArray();
-    }, 1000);
+    // setInterval(() => {
+    //   fetchChatArray();
+    // }, 1000);
+
+    const intervalId = setInterval(() => {
+      setCount((prevCount) => prevCount + 1);
+    }, 1000); // Updates every second
+
+    // Cleanup function to clear the interval when the component unmounts or you navigate away
+    return () => {
+      clearInterval(intervalId);
+    };
+
+
   }, []);
 
   return (
